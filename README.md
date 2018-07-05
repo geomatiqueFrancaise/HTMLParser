@@ -22,6 +22,7 @@ Those libraries must be installed on your machine :
     Run this command:
 
     a) python script.py a b c d
+        
         where :
         
        - "a" :  is you url file. If you want to comment you url file, you can do this by adding a '#' at the begining of the line. The script will si;ply ignore this line.
