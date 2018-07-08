@@ -77,11 +77,11 @@ class SoupObj:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(    description='''This script will send request to each http adress in a txt file and will parse the html response to a RSS file based on tag name (i.e :"div" or "article"), attribute (i.e : "name" or "id") and value (i.e : "news" or whatever) ''', epilog="""Output in source directory and name will be 'rss_ouput.xml""")
-    #requiredNamed = parser.add_argument_group('required arguments')
-    parser.add_argument('-uf', '--urlfile', type=str, help = 'This is a simple text file that contains http url one by one . If you want to comment you url file, you can do this by adding a "#" at the begining of the line. The script will simply ignore this line.', required=True)
-    parser.add_argument('-t', '--tag', type=str, help = 'target tag in DOM HTML', required=True)
-    parser.add_argument('-att', '--AttrName', type=str, help ='target attribute of the above tag', required=True)
-    parser.add_argument('-v', '--ValueName', type=str , help='attribute value of the tag', required=True)
+    requiredNamed = parser.add_argument_group('required arguments')
+    requiredNamed.add_argument('-uf', '--urlfile', type=str, help = 'This is a simple text file that contains http url one by one . If you want to comment you url file, you can do this by adding a "#" at the begining of the line. The script will simply ignore this line.', required=True)
+    requiredNamed.add_argument('-t', '--tag', type=str, help = 'target tag in DOM HTML', required=True)
+    requiredNamed.add_argument('-att', '--AttrName', type=str, help ='target attribute of the above tag', required=True)
+    requiredNamed.add_argument('-v', '--ValueName', type=str , help='attribute value of the tag', required=True)
     args = parser.parse_args()
     a = SoupObj()
     parser.parse_args(namespace=a)
