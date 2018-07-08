@@ -21,17 +21,24 @@ Those libraries must be installed on your machine :
 
     Run this command:
 
-    a) python script.py a b c d
+    a) python HTML2RSS.py -uf arg1 -t arg2 -att arg3 -v arg4
         
         where :
         
-       - "a" :  is you url file. If you want to comment you url file, you can do this by adding a '#' at the begining of the line. The script will si;ply ignore this line.
 
-       - "b" : is the tag you target in the DOM (HTML)
+        -uf URLFILE, --urlfile URLFILE : 
 
-       - "c" : is the attribute of the above tag
+                        This is a simple text file that contains http url one
+                        by one . If you want to comment you url file, you can
+                        do this by adding a "#" at the begining of the line.
+                        The script will simply ignore this line.
 
-       - "d" : is the value of this attribute
+
+        -t TAG, --tag TAG : This is the target tag in DOM HTML
+
+        -att ATTRNAME, --AttrName ATTRNAME : This is the target attribute of the above tag
+
+        -v VALUENAME, --ValueName VALUENAME : This is the attribute value of the tag
 
 3) Exceptions:
 

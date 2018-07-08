@@ -5,18 +5,20 @@ import requests
 import datetime
 from codecs import open
 import re
-
+import argparse
 
 class SoupObj:
-    def __init__(self, file, tag, AttrName, ValueName):
-        self.source = self.TestFile(file)
+    def __init__(self, urlfile=None, tag=None, AttrName=None, ValueName=None):
+        self.urlfile = urlfile
         self.tag = tag
         self.AttrName = AttrName
         self.ValueName = ValueName
         self.list = []
 
+
     def CollectData(self):
-        with self.source as f:
+        self.urlfile = self.TestFile(str(self.urlfile))
+        with self.urlfile as f:
             lines = [line.rstrip('\n') for line in f if re.match('^#', line) is None]
             for url in lines:
                 
@@ -31,7 +33,14 @@ class SoupObj:
                 except Exception as e:
                     print(f"!!!!!  cannot open the url {url}   !!!")
 
-        self.source.close()
+        self.urlfile.close()
+
+    def parse_args(self, argv=None):
+
+        self.tag = args.tag
+        self.urlfile = self.TestFile(args.file)
+        self.AttrName = args.attribute
+        self.ValueName = args.value
 
     def CreateRSS(self):
         date = datetime.datetime.now()
@@ -53,19 +62,38 @@ class SoupObj:
         xmlData.write('</rss>' + "\n")
         xmlData.close()
     
-    def TestFile(self, file):
+    def TestFile(self, files):
         try:
-            ThisFile = open(file, 'r', encoding='utf-8')
-            return ThisFile 
-        except expression as identifier:
+            print(files)
+            if files is not None:
+                ThisFile = open(files, 'r', encoding='utf-8')
+                return ThisFile 
+        except Exception as e:
             print("!!! --------Cannot Open the specified file -----!!!!")
             sys.exit()
 
 
 
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(    description='''This script will send request to each http adress in a txt file and will parse the html response to a RSS file based on tag name (i.e :"div" or "article"), attribute (i.e : "name" or "id") and value (i.e : "news" or whatever) ''', epilog="""Output in source directory and name will be 'rss_ouput.xml""")
+    #requiredNamed = parser.add_argument_group('required arguments')
+    parser.add_argument('-uf', '--urlfile', type=str, help = 'This is a simple text file that contains http url one by one . If you want to comment you url file, you can do this by adding a "#" at the begining of the line. The script will simply ignore this line.', required=True)
+    parser.add_argument('-t', '--tag', type=str, help = 'target tag in DOM HTML', required=True)
+    parser.add_argument('-att', '--AttrName', type=str, help ='target attribute of the above tag', required=True)
+    parser.add_argument('-v', '--ValueName', type=str , help='attribute value of the tag', required=True)
+    args = parser.parse_args()
+    a = SoupObj()
+    parser.parse_args(namespace=a)
+    a.CollectData()
+    a.CreateRSS()
 
 
-HtmlParser = SoupObj(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-HtmlParser.CollectData()
-HtmlParser.CreateRSS()
+
+
+
+
+
+# HtmlParser = SoupObj(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+# HtmlParser.CollectData()
+# HtmlParser.CreateRSS()
