@@ -6,35 +6,6 @@ import datetime
 from codecs import open
 import re
 
-# date = datetime.datetime.now()
-# dateStr = str(date)
-
-# source = requests.get(sys.argv[1]).text
-# soup = BeautifulSoup(source, 'lxml')
-# a = soup.find_all('font', {'color' :  str(sys.argv[2])})
-
-# xmlData = open('rss_output.xml', 'w', encoding='utf-8')
-# xmlData.write('<?xml version="1.0" encoding=\"UTF-8\"?>' + "\n")
-# xmlData.write('<rss version=\"2.0\" xmlns:a10=\"http://www.w3.org/2005/Atom\">' + "\n")
-# xmlData.write('    ' + '<channel>' + "\n")
-# xmlData.write('        ' +'<title>News</title>' + "\n")
-# xmlData.write('        ' +f'<lastBuildDate>{dateStr}</lastBuildDate>' + "\n")
-
-
-# for row in a:
-#     itemContent = row.text
-#     print(itemContent)
-#     xmlData.write('        ' +'<item>' + "\n")
-#     xmlData.write('             ' + '<description>' \
-#     + itemContent + '</description>' + "\n")
-#     xmlData.write('        ' +'</item>' + "\n")
-            
-
-
-# xmlData.write('</channel>' + "\n")
-# xmlData.write('</rss>' + "\n")
-# xmlData.close()
-
 
 class SoupObj:
     def __init__(self, file, tag, AttrName, ValueName):
